@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farewell Contribution Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      padding: 20px;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Farewell Contribution Form</h2>
+    <form id="farewellForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dno">Door Number (D.No)</label>
+        <input type="text" id="dno" name="dno" required />
+      </div>
+
+      <div class="form-group">
+        <label for="payment">Payment Amount</label>
+        <input type="number" id="payment" name="payment" value="200" required />
+      </div>
+
+      <div class="form-group">
+        <label for="gateway">Payment Gateway</label>
+        <select id="gateway" name="gateway" required>
+          <option value="">-- Select --</option>
+          <option value="Cash">Cash</option>
+          <option value="Gpay">Gpay</option>
+          <option value="PhonePe">PhonePe</option>
+          <option value="Paytm">Paytm</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Payment Status / Notes</label>
+        <select id="status" name="status" required>
+          <option value="">-- Select --</option>
+          <option value="Members Paid">Members Paid</option>
+          <option value="Not Paid">Not Paid</option>
+          <option value="Cash">Cash</option>
+          <option value="Gpay">Gpay</option>
+          <option value="Balance">Balance</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reference">Additional Reference (Optional)</label>
+        <input type="number" id="reference" name="reference" />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("farewellForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const formData = {
+    name: document.getElementById("name").value,
+    dno: document.getElementById("dno").value,
+    payment: document.getElementById("payment").value,
+    gateway: document.getElementById("gateway").value,
+    status: document.getElementById("status").value,
+    reference: document.getElementById("reference").value
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbwegCWHyr2H7OMnpzj1PQWjREdjOvMGXP3vwGwnifXMk_0cagluW3i9LcPAVoBC0xG1Cg/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("Form submitted successfully!");
+    document.getElementById("farewellForm").reset();
+  })
+  .catch(err => {
+    alert("There was an error submitting the form.");
+    console.error(err);
+  });
+});
+
+  </script>
+</body>
+</html>
